@@ -1,0 +1,11 @@
+# Render Blueprint - lets you deploy with one click from GitHub
+services:
+  - type: web
+    name: resume-screening-system
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3

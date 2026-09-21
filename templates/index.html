@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resume Screener</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <header class="page-header">
+    <h1>Resume Screener</h1>
+    <p>Add a job description and a batch of resumes. The best matches come first.</p>
+  </header>
+
+  <main class="layout">
+
+    <!-- ========== LEFT SIDE: the form ========== -->
+    <form id="screen-form" class="panel">
+
+      <!-- Job description -->
+      <section>
+        <h2><span class="step">1</span> Job description</h2>
+
+        <!-- Tabs: switch between pasting text and uploading a PDF -->
+        <div class="tabs">
+          <button type="button" class="tab active" data-mode="text">Paste text</button>
+          <button type="button" class="tab" data-mode="pdf">Upload PDF</button>
+        </div>
+
+        <div class="note">
+          <p>(<strong>NOTE :</strong> Total upload limit is 50 MB per request)</p>
+        </div>
+
+        <textarea id="jd-text" rows="8" placeholder="Paste the job description here..."></textarea>
+
+        <label id="jd-pdf-box" class="file-pick hidden">
+          <input type="file" id="jd-file" accept=".pdf">
+          <span id="jd-file-name">Choose a job description PDF</span>
+        </label>
+      </section>
+
+      <!-- Resumes -->
+      <section>
+        <h2><span class="step">2</span> Resumes <small>(PDF only)</small></h2>
+
+        <label id="dropzone" class="dropzone">
+          <input type="file" id="resume-input" accept=".pdf" multiple>
+          <strong>Drop resumes here</strong>
+          <span>or click to browse</span>
+        </label>
+
+        <ul id="file-list" class="file-list"></ul>
+      </section>
+
+      <p id="message" class="message hidden"></p>
+
+      <div class="buttons">
+        <button type="submit" id="submit-btn" class="btn-main">Screen resumes</button>
+        <button type="button" id="reset-btn" class="btn-plain">Start over</button>
+      </div>
+    </form>
+
+    <!-- ========== RIGHT SIDE: the results ========== -->
+    <section class="panel results-panel">
+      <h2>Rankings</h2>
+
+      <p>
+        <strong>NOTE : </strong>
+        Score of 40%+ is already a strong match, because resumes and job descriptions never share every word
+      </p>
+
+      <p id="empty-text" class="empty">Your ranked candidates will appear here.</p>
+
+      <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <span>Reading resumes...</span>
+      </div>
+
+      <p id="summary" class="summary hidden"></p>
+      <div id="results"></div>
+      <p id="skipped" class="skipped hidden"></p>
+    </section>
+
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
