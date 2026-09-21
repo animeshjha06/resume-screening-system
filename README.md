@@ -3,7 +3,7 @@
 A small web app that ranks resumes against a job description using **NLP and Machine Learning**.
 
 - Upload many resumes (PDF only)
-- Add the job description as pasted text **or** a PDF
+- Add the job description as pasted text or a PDF
 - Get a ranked list with a match score for every resume
 
 **Tech:** Python, Flask, Scikit-learn, Pandas, NumPy, HTML, CSS, JavaScript
@@ -34,8 +34,7 @@ resume-screening-system/
 │   └── script.js        # Page interactions
 ├── pyproject.toml       # Dependencies (used by uv)
 ├── uv.lock              # Exact versions (created by uv)
-├── requirements.txt     # Dependencies for Render only
-└── render.yaml          # Render deployment settings
+└── requirements.txt     # Dependencies for Render only
 ```
 
 ---
@@ -67,26 +66,6 @@ uv run app.py
 **4. Open** http://127.0.0.1:5000 in your browser.
 
 To stop the app, press `Ctrl + C`.
-
----
-
-## Deploy on Render (free)
-
-1. Push this folder to a GitHub repository.
-2. On [render.com](https://render.com), click **New +** → **Blueprint** and select your repository.
-   Render reads `render.yaml` and sets everything up automatically.
-3. Click **Apply**. After the build finishes, your live link is ready.
-
-**Manual setup instead of Blueprint:** create a **Web Service** with
-
-| Setting | Value |
-|---|---|
-| Build Command | `pip install -r requirements.txt` |
-| Start Command | `gunicorn app:app` |
-
-> The free plan sleeps after some idle time, so the first request may take about 30 seconds.
-
-**Adding a new package later:** run `uv add package-name`, then also add it to `requirements.txt` so Render installs it.
 
 ---
 
